@@ -6,13 +6,12 @@ import os
 
 class Agent:
     command_cfg = {
-        "kp": 30.0,
-        "kd": 0.8,
-        "lin_vel_x_range": [0.5, 3.0],  # SAME as training
+        "kp":20.0,
+        "kd":0.5,
+        "lin_vel_x_range": [0.0, 0.0],
         "lin_vel_y_range": [0.0, 0.0],
-        "ang_vel_range": [0.0, 0.0],
+        "ang_vel_range": [3.0, 3.0],
     }
-
 
     def __init__(self):
         """
