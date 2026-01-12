@@ -26,10 +26,10 @@ def get_train_cfg(exp_name, max_iterations):
             "class_name": "PPO",
             "clip_param": 0.2,
             "desired_kl": 0.01,
-            "entropy_coef": 0.02,
+            "entropy_coef": 0.01,
             "gamma": 0.99,
             "lam": 0.95,
-            "learning_rate": 5e-4,
+            "learning_rate": 0.001,
             "max_grad_norm": 1.0,
             "num_learning_epochs": 5,
             "num_mini_batches": 4,
@@ -57,7 +57,7 @@ def get_train_cfg(exp_name, max_iterations):
             "run_name": "",
         },
         "runner_class_name": "OnPolicyRunner",
-        "num_steps_per_env": 32,
+        "num_steps_per_env": 24,
         "save_interval": 100,
         "empirical_normalization": None,
         "seed": 1,
@@ -99,18 +99,18 @@ def get_cfgs():
             "RL_calf_joint",
         ],
         # PD
-        "kp": 30.0,
-        "kd": 0.8,
+        "kp": 35.0,
+        "kd": 1.2,
         # termination
-        "termination_if_roll_greater_than": 30,  # degree
-        "termination_if_pitch_greater_than": 30,
+        "termination_if_roll_greater_than": 10,  # degree
+        "termination_if_pitch_greater_than": 10,
         # base pose
         "base_init_pos": [0.0, 0.0, 0.42],
         "base_init_quat": [1.0, 0.0, 0.0, 0.0],
-        "episode_length_s": 12.0,
-        "resampling_time_s": 2.0,
-        "action_scale": 0.4,
-        "simulate_action_latency": True,
+        "episode_length_s": 20.0,
+        "resampling_time_s": 1.5,
+        "action_scale": 0.12,
+        "simulate_action_latency": False,
         "clip_actions": 100.0,
     }
     obs_cfg = {
@@ -127,17 +127,17 @@ def get_cfgs():
         "base_height_target": 0.3,
         "feet_height_target": 0.075,
         "reward_scales": {
-            "tracking_lin_vel": 3.0,
-            "tracking_ang_vel": 0.1,
-            "lin_vel_z": -0.5,
-            "base_height": -10.0,
-            "action_rate": -0.001,
-            "similar_to_default": -0.05,
+            "tracking_lin_vel": 1.2,
+            "tracking_ang_vel": 0.6,
+            "lin_vel_z": -1.0,
+            "base_height": -50.0,
+            "action_rate": -0.005,
+            "similar_to_default": -0.1,
         },
     }
     command_cfg = {
         "num_commands": 3,
-        "lin_vel_x_range": [0.5, 3.0],
+        "lin_vel_x_range": [0.5, 1.0],
         "lin_vel_y_range": [0, 0],
         "ang_vel_range": [0, 0],
     }
@@ -147,9 +147,9 @@ def get_cfgs():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--exp_name", type=str, default="go2-running")
+    parser.add_argument("-e", "--exp_name", type=str, default="go2-walking")
     parser.add_argument("-B", "--num_envs", type=int, default=4096)
-    parser.add_argument("--max_iterations", type=int, default=101)
+    parser.add_argument("--max_iterations", type=int, default=801)
     args = parser.parse_args()
 
     gs.init(backend=gs.gpu, precision="32", logging_level="warning", performance_mode=True)
