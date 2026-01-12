@@ -23,7 +23,7 @@ from go2_env import Go2Env
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--exp_name", type=str, default="go2-walking")
+    parser.add_argument("-e", "--exp_name", type=str, default="go2-running")
     parser.add_argument("--ckpt", type=int, default=100)
     parser.add_argument("-v", "--vis", action="store_true", default=False, help="Visualize")
     args = parser.parse_args()

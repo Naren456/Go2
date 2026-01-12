@@ -1,0 +1,75 @@
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Task 2 :  Running/go2_eval.py
+	modified:   Task 2 :  Running/go2_train.py
+	modified:   Task 3 : Spin/go2_train.py
+	modified:   Task 4 : Circle/go2_train.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Task 2 :  Running/logs/go2-running/
+	Task 4 : Circle/logs/
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/Task 2 :  Running/go2_eval.py b/Task 2 :  Running/go2_eval.py
+index 7cdaf8b..a49c62e 100644
+--- a/Task 2 :  Running/go2_eval.py	
++++ b/Task 2 :  Running/go2_eval.py	
+@@ -23,7 +23,7 @@ from go2_env import Go2Env
+ 
+ def main():
+     parser = argparse.ArgumentParser()
+-    parser.add_argument("-e", "--exp_name", type=str, default="go2-walking")
++    parser.add_argument("-e", "--exp_name", type=str, default="go2-running")
+     parser.add_argument("--ckpt", type=int, default=100)
+     parser.add_argument("-v", "--vis", action="store_true", default=False, help="Visualize")
+     args = parser.parse_args()
+diff --git a/Task 2 :  Running/go2_train.py b/Task 2 :  Running/go2_train.py
+index 4ca421c..383c560 100644
+--- a/Task 2 :  Running/go2_train.py	
++++ b/Task 2 :  Running/go2_train.py	
+@@ -147,7 +147,7 @@ def get_cfgs():
+ 
+ def main():
+     parser = argparse.ArgumentParser()
+-    parser.add_argument("-e", "--exp_name", type=str, default="go2-spin")
++    parser.add_argument("-e", "--exp_name", type=str, default="go2-running")
+     parser.add_argument("-B", "--num_envs", type=int, default=4096)
+     parser.add_argument("--max_iterations", type=int, default=101)
+     args = parser.parse_args()
+diff --git a/Task 3 : Spin/go2_train.py b/Task 3 : Spin/go2_train.py
+index 930d5a3..4ec9066 100644
+--- a/Task 3 : Spin/go2_train.py	
++++ b/Task 3 : Spin/go2_train.py	
+@@ -102,8 +102,8 @@ def get_cfgs():
+         "kp": 20.0,
+         "kd": 0.5,
+         # termination
+-        "termination_if_roll_greater_than": 60,  # degree
+-        "termination_if_pitch_greater_than": 60,
++        "termination_if_roll_greater_than": 20,  # degree
++        "termination_if_pitch_greater_than": 20,
+         # base pose
+         "base_init_pos": [0.0, 0.0, 0.42],
+         "base_init_quat": [1.0, 0.0, 0.0, 0.0],
+diff --git a/Task 4 : Circle/go2_train.py b/Task 4 : Circle/go2_train.py
+index b263ccc..65acf5b 100644
+--- a/Task 4 : Circle/go2_train.py	
++++ b/Task 4 : Circle/go2_train.py	
+@@ -146,7 +146,7 @@ def get_cfgs():
+ 
+ def main():
+     parser = argparse.ArgumentParser()
+-    parser.add_argument("-e", "--exp_name", type=str, default="go2-spin")
++    parser.add_argument("-e", "--exp_name", type=str, default="go2-circle")
+     parser.add_argument("-B", "--num_envs", type=int, default=4096)
+     parser.add_argument("--max_iterations", type=int, default=100)
+     args = parser.parse_args()
